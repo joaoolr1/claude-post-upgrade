@@ -46,12 +46,23 @@ const app = new AgentApplicationBuilder().build();
 
 // Handle incoming messages
 app.onActivity(ActivityTypes.Message, async (context) => {
+  console.log('📨 Received message activity:', context.activity.text);
+  
   const userMessage = context.activity.text;
 
   if (!userMessage) {
     await context.sendActivity('Please send a message.');
     return;
   }
+
+  // Check if ANTHROPIC_API_KEY is available
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.error('❌ ANTHROPIC_API_KEY environment variable is not set');
+    await context.sendActivity('Configuration error: ANTHROPIC_API_KEY is not configured. Please set this environment variable in your Azure Web App settings.');
+    return;
+  }
+
+  console.log('✅ ANTHROPIC_API_KEY is configured');
 
   try {
     // Query Claude Model using original agent logic
@@ -79,8 +90,8 @@ app.onActivity(ActivityTypes.Message, async (context) => {
       await context.sendActivity('Sorry, I could not get a response from Claude.');
     }
   } catch (error) {
-    console.error('Error:', error);
-    await context.sendActivity('Sorry, something went wrong.');
+    console.error('❌ Error processing message:', error);
+    await context.sendActivity(`Sorry, something went wrong: ${error.message}`);
   }
 });
 
