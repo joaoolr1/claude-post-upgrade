@@ -9,6 +9,9 @@
     "dev": "node --env-file .env --watch src/index.js",
     "test-tool": "agentsplayground"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

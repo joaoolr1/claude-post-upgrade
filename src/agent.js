@@ -44,6 +44,15 @@ Always structure your code responses with proper TypeScript typing, clear separa
 // Create the agent application
 const app = new AgentApplicationBuilder().build();
 
+// Add health check endpoint for Azure Web App monitoring
+app.router?.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'healthy', 
+    timestamp: new Date().toISOString(),
+    version: process.env.npm_package_version || '1.0.0'
+  });
+});
+
 // Handle incoming messages
 app.onActivity(ActivityTypes.Message, async (context) => {
   const userMessage = context.activity.text;
