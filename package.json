@@ -1,0 +1,28 @@
+{
+  "name": "claude-agent-upgraded",
+  "version": "1.0.0",
+  "description": "Upgraded Claude AI Agent with Agent365 SDK",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --env-file .env --watch src/index.js",
+    "test-tool": "agentsplayground"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@microsoft/agents-hosting-express": "^1.0.15",
+    "@microsoft/agents-hosting": "^1.0.15",
+    "@microsoft/agents-activity": "^1.0.15",
+    "express": "^4.18.0",
+    "@anthropic-ai/claude-agent-sdk": "^0.1.10",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@microsoft/m365agentsplayground": "^0.2.19",
+    "@types/node": "^24.7.0",
+    "typescript": "^5.9.3"
+  }
+}

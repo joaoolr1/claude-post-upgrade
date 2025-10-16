@@ -1,0 +1,30 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.27/MicrosoftTeams.schema.json",
+    "id": "57c62a61-afe2-4ff5-911b-509039491f55",
+    "name": {
+        "short": "Claude Backend Architect",
+        "full": "Claude Senior Backend TypeScript Architect Agent"
+    },
+    "description": 
+    {
+        "short": "AI agent for backend TypeScript development",
+        "full": "A Senior Backend TypeScript Architect AI agent with deep expertise in server-side development using Bun runtime, specialized in clean, maintainable, and well-documented code."
+    },
+    "version": "1.0",
+    "manifestVersion": "1.27",
+    "developer": 
+    {
+        "name": "Microsoft",
+        "mpnId": "",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://privacy.microsoft.com",
+        "termsOfUseUrl": "https://www.microsoft.com/legal/terms-of-use"
+    },
+    "agenticUserTemplates" :
+    [
+        {
+            "id": "57c62a61-afe2-4ff5-911b-509039491f55",
+            "file": "agenticUserTemplateManifest.json"
+        } 
+    ]
+}
