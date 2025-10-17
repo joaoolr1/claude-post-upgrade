@@ -1,6 +1,6 @@
 {
     "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.27/MicrosoftTeams.schema.json",
-    "id": "57c62a61-afe2-4ff5-911b-509039491f55",
+    "id": "a8f4c9d2-3e7b-4a5f-9c8d-1e6b2a7f3c9e",
     "name": {
         "short": "Claude Backend Architect",
         "full": "Claude Senior Backend TypeScript Architect Agent"
@@ -16,14 +16,14 @@
     {
         "name": "Microsoft",
         "mpnId": "",
-        "websiteUrl": "https://www.microsoft.com",
+        "websiteUrl": "https://backend-architect-agent-c3fudwbdgmhvaaar.westeurope-01.azurewebsites.net/api/messages",
         "privacyUrl": "https://privacy.microsoft.com",
         "termsOfUseUrl": "https://www.microsoft.com/legal/terms-of-use"
     },
     "agenticUserTemplates" :
     [
         {
-            "id": "57c62a61-afe2-4ff5-911b-509039491f55",
+            "id": "b2d8e5f1-4c9a-6e3b-7f2d-9a5c8e1b4f7a",
             "file": "agenticUserTemplateManifest.json"
         } 
     ]
