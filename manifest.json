@@ -10,8 +10,14 @@
         "short": "AI agent for backend TypeScript development",
         "full": "A Senior Backend TypeScript Architect AI agent with deep expertise in server-side development using Bun runtime, specialized in clean, maintainable, and well-documented code."
     },
-    "version": "1.0",
-    "manifestVersion": "1.27",
+    "icons": {
+		"outline": "outline.png",
+		"color": "color.png"
+	},
+	"accentColor": "#07687d",
+    "version": "1.0.0",
+    "manifestVersion": "devPreview",
+    "functionsAs": "AgentOnly",
     "developer": 
     {
         "name": "Microsoft",
