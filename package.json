@@ -23,8 +23,8 @@
     "@microsoft/agents-activity": "^1.0.15",
     "@microsoft/agents-hosting": "^1.0.15",
     "@microsoft/agents-hosting-express": "^1.0.15",
-    "@microsoft/agents-a365-observability": "file:../microsoft-agents-a365-observability-0.0.0-placeholder.tgz",
-    "@microsoft/agents-a365-runtime": "file:../microsoft-agents-a365-runtime-0.0.0-placeholder.tgz",
+    "@microsoft/agents-a365-observability": "file:./microsoft-agents-a365-observability-0.0.0-placeholder.tgz",
+    "@microsoft/agents-a365-runtime": "file:./microsoft-agents-a365-runtime-0.0.0-placeholder.tgz",
     "dotenv": "^17.2.3",
     "express": "^5.1.0"
   },
