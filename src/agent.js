@@ -172,7 +172,10 @@ async function queryModel(userInput, agentDetails, tenantDetails) {
 }
 
 // Create the agent application
-const app = new AgentApplicationBuilder().build();
+const app = new AgentApplicationBuilder()
+  .withAuthorization({
+    agentic: { } // We have the type and scopes set in the .env file
+  }).build();
 
 // Handle incoming messages with observability
 app.onActivity(ActivityTypes.Message, async (context) => {
