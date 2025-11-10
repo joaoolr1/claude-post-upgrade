@@ -1,4 +1,4 @@
-import { AgentApplicationBuilder } from '@microsoft/agents-hosting';
+import { AgentApplicationBuilder, MemoryStorage } from '@microsoft/agents-hosting';
 import { ActivityTypes } from '@microsoft/agents-activity';
 import { query } from '@anthropic-ai/claude-agent-sdk';
 import { 
@@ -171,11 +171,15 @@ async function queryModel(userInput, agentDetails, tenantDetails) {
   }
 }
 
+const storage = new MemoryStorage();
+
 // Create the agent application
 const app = new AgentApplicationBuilder()
   .withAuthorization({
     agentic: { } // We have the type and scopes set in the .env file
-  }).build();
+  })
+  .withStorage(storage)
+  .build();
 
 // Handle incoming messages with observability
 app.onActivity(ActivityTypes.Message, async (context) => {
