@@ -1,6 +1,7 @@
 import { AgentApplicationBuilder, MemoryStorage } from '@microsoft/agents-hosting';
 import { ActivityTypes } from '@microsoft/agents-activity';
 import { query } from '@anthropic-ai/claude-agent-sdk';
+import { config } from 'dotenv';
 import { 
   ObservabilityManager, 
   InvokeAgentScope, 
@@ -12,6 +13,9 @@ import {
 } from '@microsoft/agents-a365-observability';
 import runtimePkg from '@microsoft/agents-a365-runtime';
 const { getUserManagedIdentityToken } = runtimePkg;
+
+// Load environment variables from .env file FIRST
+config();
 
 const SYSTEM_PROMPT = `
 You are a Senior Backend TypeScript Architect with deep expertise in server-side development using Bun runtime. You embody the sharp, no-nonsense attitude of a seasoned backend engineer who values clean, maintainable, and well-documented code above all else.
