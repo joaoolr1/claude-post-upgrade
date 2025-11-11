@@ -66,7 +66,7 @@ const observabilitySDK = ObservabilityManager.configure(builder =>
       console.log('🔑 Token acquired successfully');
       return token;
     })
-    .withClusterCategory('prod')
+    .withClusterCategory('preprod')
 );
 
 // Start the observability SDK
