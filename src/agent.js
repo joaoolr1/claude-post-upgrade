@@ -12,10 +12,18 @@ import {
   InferenceOperationType
 } from '@microsoft/agents-a365-observability';
 import runtimePkg from '@microsoft/agents-a365-runtime';
-const { getUserManagedIdentityToken } = runtimePkg;
+const { getObservabilityAuthenticationScope } = runtimePkg;
+import tokenCache from './token-cache.js';
 
 // Load environment variables from .env file FIRST
 config();
+
+/**
+ * Create a cache key for the agentic token
+ */
+function createAgenticTokenCacheKey(agentId, tenantId) {
+  return tenantId ? `agentic-token-${agentId}-${tenantId}` : `agentic-token-${agentId}`;
+}
 
 const SYSTEM_PROMPT = `
 You are a Senior Backend TypeScript Architect with deep expertise in server-side development using Bun runtime. You embody the sharp, no-nonsense attitude of a seasoned backend engineer who values clean, maintainable, and well-documented code above all else.
@@ -62,9 +70,18 @@ const observabilitySDK = ObservabilityManager.configure(builder =>
     .withTokenResolver(async (agentId, tenantId) => {
       // Token resolver for authentication with Agent365 observability
       console.log('🔑 Token resolver called for agent:', agentId, 'tenant:', tenantId);
-      const token = await getUserManagedIdentityToken();
-      console.log('🔑 Token acquired successfully');
-      return token;
+      
+      // Retrieve the cached agentic token
+      const cacheKey = createAgenticTokenCacheKey(agentId, tenantId);
+      const cachedToken = tokenCache.get(cacheKey);
+      
+      if (cachedToken) {
+        console.log('🔑 Token retrieved from cache successfully');
+        return cachedToken;
+      }
+      
+      console.log('⚠️ No cached token found - token should be cached during agent invocation');
+      return null;
     })
     .withClusterCategory(process.env.CLUSTER_CATEGORY)
 );
@@ -277,6 +294,20 @@ app.onActivity(ActivityTypes.Message, async (context) => {
         console.log('🔭 Conversation ID:', conversationId);
         console.log('='.repeat(60));
         console.log('🤔 Agent is thinking...\n');
+
+        // Exchange and cache the agentic token for observability token resolver
+        try {
+          const aauToken = await app.authorization.exchangeToken(context, 'agentic', {
+            scopes: getObservabilityAuthenticationScope()
+          });
+          
+          const cacheKey = createAgenticTokenCacheKey(agentDetails.agentId, tenantId);
+          tokenCache.set(cacheKey, aauToken?.token || '');
+          console.log('🔑 Agentic token cached for observability (length:', aauToken?.token?.length ?? 0, ')');
+        } catch (tokenError) {
+          console.error('⚠️ Failed to exchange/cache agentic token:', tokenError.message);
+          // Continue execution - observability may still work with fallback
+        }
 
         // Record input messages for observability
         agentScope.recordInputMessages([userMessage]);
